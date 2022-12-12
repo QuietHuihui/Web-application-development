@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="text-center h1 text-danger">登陆</div>
+<div class="container">
+    {% include '_messages.html' %}
+    {% from "_formhelpers.html" import render_field %}
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+    <form method="post" enctype="multipart/form-data">
+        {{form.csrf_token}}
+        <div>
+            {{ render_field(form.email,class="form-control") }}
+            {{ render_field(form.password,class="form-control") }}
+        </div>
+
+        <p><input type="submit" value="登陆" class="btn btn-info mt-2"></p>
+        <p><a href="{{url_for('admin')}}" class="btn btn-danger mt-2">管理员登陆</a></p>
+    </form>
+    </div>
+        <div class="col-md-4"></div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% include '_messages.html' %}
+{% include 'adminbar.html' %}
+<div class="text-center h1 text-danger mt-2">订单管理</div>
+<div class="container mt-2">
+            <a></a>
+            {% for order in orders %}
+                <div class="accordion" id="accordionExample-{{loop.index}}">
+                    <div class="card">
+                        <div class="card-header" id="headingOne-{{loop.index}}">
+                          <h4 class="mb-0">
+                            订单号:{{order.invoice}}&nbsp;
+                            <button class="btn btn-link btn-block text-right" type="button" data-toggle="collapse" data-target="#collapseOne-{{loop.index}}" aria-expanded="true" aria-controls="collapseOne-{{loop.index}}">    
+                                点击查看详情
+                            </button>
+                          </h4>
+                        </div>
+                    
+                        <div id="collapseOne-{{loop.index}}" class="collapse" aria-labelledby="headingOne-{{loop.index}}" data-parent="#accordionExample-{{loop.index}}">
+                          <div class="card-body">
+                            
+                                订单号: {{order.invoice}}<br/>
+                                状态: {{order.status}}<br/>
+                                用户ID: {{order.customer_id}}<br/>
+                                下单时间: {{order.date_created}}<br/>
+
+                                <table class="table table-sm">
+                                    <thead>
+                                        <th>序号</th>
+                                        <th>品名</th>
+                                        <th>颜色</th>
+                                        <th>价格</th>
+                                        <th>数量</th>
+                                        <th>折扣</th>
+                                        <th>小计</th>
+                                    </thead>
+                                    <tbody>
+                                        {% for key,product in order.orders.items() %}
+                                        {% set discount = "%0.2f"|format((product.discount/100)*product.price|float) %}
+                                        <tr>
+                                            <td>{{loop.index}}</td>
+                                            <td>{{product.name}}</td>
+                                        <form action="{{url_for('updatecart',code=key)}}" method="post">
+                                            <td>
+                                                {{product.color|capitalize}}
+                                            </td>
+                                            <td>￥{{"%.2f"|format(product.price)}}</td>
+                                            <td>{{product.quantity}}</td>
+                                            {% if product.discount>0 %}
+                                            <td>{{product.discount}}%&nbsp; 即优惠 ￥{{discount}}</td>
+                                            {% else %}
+                                            <td></td>
+                                            {% endif %}
+                                            {% set subtotal = product.quantity|int * product.price|float %}
+                                            <td>￥{{"%0.2f"|format((subtotal|float)-discount|float)}}</td>
+                                        </form>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+</div>
+{% endblock content %}

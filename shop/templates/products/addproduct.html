@@ -1,0 +1,73 @@
+{%  extends 'layout.html' %}
+{%  block content %}
+
+{% include '_messages.html' %}
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2 class="text-center bg-primary p-2">添加商品</h2>
+        {%  from "_formhelpers.html" import render_field %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            <!-- {{ render_field(form.name,class="form-control",placeholder="输入商品名") }}
+            {{ render_field(form.price,class="form-control",placeholder="输入商品价格") }}
+            {{ render_field(form.discount,class="form-control",placeholder="输入商品折扣") }}
+            {{ render_field(form.stock,class="form-control",placeholder="输入商品库存") }} -->
+            <label for="name">品名</label>
+            <input type="text" name="name" placeholder="输入品名" class="form-control">
+            <label for="price">价格(单位：人民币元)</label>
+            <input type="text" name="price" placeholder="输入价格" class="form-control">
+            <label for="discount">折扣(单位：%)</label>
+            <input type="text" name="discount" placeholder="输入折扣" class="form-control">
+            <label for="stock">库存</label>
+            <input type="text" name="stock" placeholder="输入库存" class="form-control">
+
+
+            <label for="brand">添加一个品牌</label>
+            <select name="brand" id="brand" class="form-control" required>
+                <option value="">选择一个品牌</option>
+                {% for brand in brands %}
+                <option value="{{brand.id}}">{{brand.name}}</option>
+                {% endfor %}
+            </select>
+            <label for="category">添加一个品类</label>
+            <select name="category" id="category" class="form-control" required>
+                <option value="">添加一个品类</option>
+                {% for category in categories %}
+                <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+            </select>
+
+            <!-- {{ render_field(form.colors,class="form-control",placeholder="输入商品颜色") }}
+            {{ render_field(form.discription,class="form-control",placeholder="输入商品描述") }} -->
+            <label for="colors">颜色(以英文逗号分隔)</label>
+            <input type="text" name="colors" placeholder="输入颜色" class="form-control">
+            <label for="discription">描述</label>
+            <textarea type="text" name="discription" placeholder="输入描述" class="form-control"></textarea>
+            
+            <div class="container">
+                <div class="row">
+                <div class="col-md-4">
+                    <!-- {{ render_field(form.image_1, class="form-control") }}</div> -->
+                    <label for="image_1">图片1</label>
+                    <input type="file" name="image_1" accept="image/*" class="form-control" required></div>
+                <div class="col-md-4">
+                    <!-- {{ render_field(form.image_2, class="form-control") }}</div> -->
+                    <label for="image_2">图片2</label>
+                    <input type="file" name="image_2" accept="image/*" class="form-control" required></div>
+                <div class="col-md-4">
+                    <!-- {{ render_field(form.image_3, class="form-control") }}</div> -->
+                    <label for="image_3">图片3</label>
+                    <input type="file" name="image_3" accept="image/*" class="form-control" required></div>
+                </div>    
+            </div>
+
+            <button type="submit" class="btn btn-outline-info mt-4">添加产品</button>
+
+        </form>
+        <p><a href="{{url_for('admin')}}" class="btn btn-outline-info mt-4">返回</a></p>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+{%  endblock content %}

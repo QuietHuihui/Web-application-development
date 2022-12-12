@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container mt-4">
+    {% include '_messages.html' %}
+    <div class="row">
+        <div class="col-md-12">
+            订单号:{{orders.invoice}}
+            <br>
+            状态:{{orders.status}}
+            <br>
+            客户名: {{customer.name}}
+            <br>
+            客户邮箱: {{customer.email}}
+            <br>
+            客户电话:{{customer.contact}}
+            <br>
+            <br>
+
+        <table class="table table-sm"> 
+            <thead>
+                <th>序号</th>
+                <th>品名</th>
+                <th>颜色</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>折扣</th>
+                <th>小计</th>
+            </thead>
+            <tbody>
+                {% for key,product in orders.orders.items() %}
+                {% set discount = "%0.2f"|format((product.discount/100)*product.price|float) %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{product.name}}</td>
+                <form action="{{url_for('updatecart',code=key)}}" method="post">
+                    <td>
+                        {{product.color|capitalize}}
+                    </td>
+                    <td>￥{{"%.2f"|format(product.price)}}</td>
+                    <td>{{product.quantity}}</td>
+                    {% if product.discount>0 %}
+                    <td>{{product.discount}}%&nbsp; 即优惠 ￥{{discount}}</td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
+                    {% set subtotal = product.quantity|int * product.price|float %}
+                    <td>￥{{"%0.2f"|format((subtotal|float)-discount|float)}}</td>
+                </form>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td><a href="#" class="btn btn-warning btn-sm">离开</a></td>
+                    <td width="15%"></td>
+                    <td colspan="4"><h4>总计: ￥{{grandTotal}}</h4></td>
+                    <!-- <td><a href="#" class="btn btn-primary btn-sm
+                        float-right mr-2">保存订单为PDF文件</a></td> -->
+                    <td width="15%"></td>   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+{% endblock content %}

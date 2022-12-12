@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% include '_messages.html' %}
+{% include 'adminbar.html' %}
+<div class="container mt-5">
+    <table class="table table-sm table-bordered">
+        <thead>
+            <th>序号</th>
+            <th>品牌名</th>
+            <th>编辑</th>
+            <th>删除</th>
+        </thead>
+        <tbody>
+            {%  if brands %}
+            {% for brand in brands %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{brand.name}}</td>
+                <td><a href="{{url_for('updatebrand', id=brand.id)}}" class="btn btn-sm btn-primary">编辑</a></td>
+                <td>
+                  <!-- <a href="" class="btn btn-sm btn-danger">删除</a> -->
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{brand.id}}">
+                    删除
+                  </button>
+                </td>
+            </tr>
+            <!-- Button trigger modal -->
+            
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal-{{brand.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{brand.name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <span class="text-danger">确定要删除品牌“{{brand.name}}”吗</span>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+                    <form action="{{url_for('deletebrand',id=brand.id)}}" method="POST">
+                      <button type="submit" class="btn btn-danger btn-sm">删除</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            {% else %}
+            {% for category in categories %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{category.name}}</td>
+                <td><a href="{{url_for('updatecat', id=category.id)}}" class="btn btn-sm btn-primary">编辑</a></td>
+                <td>
+                  <!-- <a href="" class="btn btn-sm btn-danger">删除</a> -->
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{category.id}}">
+                    删除
+                  </button>
+                </td>
+            </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal-{{category.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{category.name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <span class="text-danger">确定要删除品类“{{category.name}}”吗</span>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+                    <form action="{{url_for('deletecategory',id=category.id)}}" method="POST">
+                      <button type="submit" class="btn btn-danger btn-sm">删除</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+           
+            {% endif %}
+            
+        </tbody>
+        
+    </table>
+    {%  if brands %}
+    <p><a href="{{url_for('addbrand')}}" class="btn btn-warning btn-middle">添加品牌</a></p>
+    {% else %}
+    <p><a href="{{url_for('addcat')}}" class="btn btn-warning btn-middle">添加品类</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

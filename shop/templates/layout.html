@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <!-- 必须的 meta 标签 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+
+    <title>电商网站</title>
+  </head>
+  <body>
+    {% block content %}
+    
+    {% endblock content %}
+    <script src="{{ url_for('static',filename='js/jquery.slim.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
+
+
+  </body>
+</html>
