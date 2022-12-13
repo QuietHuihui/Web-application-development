@@ -11,7 +11,7 @@
 &nbsp;&nbsp;|-routes.py 路由  
 &nbsp;|-carts 购物车模块  
 &nbsp;&nbsp;|-carts.py 路由  
- &nbsp;;|-customers 顾客模块  
+ &nbsp;|-customers 顾客模块  
 &nbsp;&nbsp;|-forms.py 表单  
 &nbsp;&nbsp;|-models.py 数据库model类  
 &nbsp;&nbsp;|-routes.py 路由  
