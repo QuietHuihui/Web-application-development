@@ -5,7 +5,7 @@
 
 -run.py 启动应用  
 -shop  
-  |-admin 管理模块  
+&nbsp;|-admin 管理模块  
        |-forms.py 表单  
        |-models.py 数据库model类  
        |-routes.py 路由  
