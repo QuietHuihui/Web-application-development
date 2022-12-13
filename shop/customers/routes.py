@@ -17,7 +17,7 @@ def customer_register():
         db.session.add(register)
         flash(f'欢迎 {form.name.data} , 感谢您的注册。','success')
         db.session.commit()
-        return redirect(url_for('customer/login'))
+        return redirect(url_for('customerLogin'))
     return render_template('customer/register.html',form=form,brands=brands(),categories=categories())
 
 @app.route('/customer/login',methods=['GET','POST'])
