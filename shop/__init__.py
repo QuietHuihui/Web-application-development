@@ -9,9 +9,13 @@ from flask_login import LoginManager
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
+#配置sqlite数据库位置
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myshop.db'
+#配置应用密钥
 app.config['SECRET_KEY'] = "diaspfmpoqw1230j12e0bh21"
+#配置图片上传位置
 app.config['UPLOADED_PHOTOS_DEST']=os.path.join(basedir,'static/images')
+#配置图片上传集
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)

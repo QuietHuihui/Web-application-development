@@ -1,14 +1,52 @@
 # 网络应用开发实验公开代码
 ## 学号：202030442397 姓名：王旭晖
-## 项目简介
-电子商务网站
 
-## 功能介绍
-1、进入商城首页可以浏览商品，可以翻页。
-2、商城头部菜单可以进行登陆、注册。
-3、可以按照品牌和品类筛选商品，也可以在右上角搜索框中搜索商品，搜索的范围包括商品名和商品简介。
-4、在浏览商品的界面点击加入购物车可以把商品加入到购物车。
-5、点击商品的详情按钮进入详情页面。详情页面中可以点击切换不同的商品图片。可以详细选择商品的颜色，数量。然后添加到购物车。
-6、点击购物车可以查看、修改、删除购物车中的商品。点击下单可以查看订单状态。
-7、以管理员身份登陆商城，可以对商品目录进行增删改。可以查看订单详情。
+## 代码文件简单说明
 
+-run.py 启动应用
+-shop
+  |-admin管理模块
+       |-forms.py表单
+       |-models.py数据库model类
+       |-routes.py路由
+ |-carts购物车模块
+       |-carts.py路由
+ |-customers顾客模块
+       |-forms.py表单
+       |-models.py数据库model类
+       |-routes.py路由
+ |-products商品模块
+       |-forms.py表单
+       |-models.py数据库model类
+       |-routes.py路由
+ |-static静态资源
+       |-css
+       |-js
+       |-images商品图片保存位置
+ |-templates模板
+       |-admin管理员页面
+	|-brand.html品牌和品类管理
+	|-index.html商品管理
+	|-order.html订单详情页
+	|-register.html管理员注册页面
+	|-login.html管理员登录页面
+       |-customer顾客页面
+	|-login.html顾客登录页面
+	|-register.html顾客注册页面
+	|-order.html顾客查看订单页面
+       |-products商品页面
+	|-addbrand.html添加品牌或者品类
+	|-addproduct.html添加商品
+	|-carts.html 购物车页面
+	|-result.html 搜索结果页面
+	|-single_page.html 商品详情页
+	|-updatebrand.html 进行品牌和品类的更新
+	|-updateproduct.html 进行商品更新的页面
+       |-_formhelpers.html 用于渲染表单
+       |-_messages.html 用于处理flash()函数弹出的信息
+       |-adminbar.html 管理员页面的导航栏
+       |-layout.html 引入bootstrap4提供的css和js
+       |-navbar.html 顾客页面下的导航栏
+
+
+       

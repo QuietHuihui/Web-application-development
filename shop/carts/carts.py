@@ -5,6 +5,7 @@ from shop.products.models import Addproduct
 from shop.products.routes import brands,categories
 import json
 
+#合并字典
 def MagerDicts(dict1,dict2):
     if isinstance(dict1,list) and isinstance(dict2,list):
         return dict1+dict2
@@ -15,13 +16,16 @@ def MagerDicts(dict1,dict2):
 @app.route('/addcart',methods=['POST'])
 def AddCart():
     try:
+        #从request中获取商品信息
         product_id = request.form.get('product_id')
         quantity = int(request.form.get('quantity'))
         colors = request.form.get('colors')
         product = Addproduct.query.filter_by(id=product_id).first()
         if product_id and quantity and colors and request.method == "POST":
+            #把商品信息存放到字典中
             DictItems = {product_id:{'name':product.name,'price':float(product.price),'discount':float(product.discount),
             'color':colors,'quantity':quantity,'image':product.image_1,'colors':product.colors}}
+            #将字典存放到会话控制中
             if 'Shoppingcart' in session:
                 print(session['Shoppingcart'])
                 if product_id in session['Shoppingcart']:
@@ -56,14 +60,6 @@ def getCart():
         grandtotal=float("%.2f"%(subtotal))
     return render_template('products/carts.html',grandtotal=grandtotal,brands=brands(),categories=categories())
 
-#删除购物车内容
-# @app.route('/empty')
-# def empty_cart():
-#     try:
-#         session.clear()
-#         return redirect(url_for('home'))
-#     except Exception as e:
-#         print(e)
 
 @app.route('/updatecart/<int:code>',methods=['POST'])
 def updatecart(code):

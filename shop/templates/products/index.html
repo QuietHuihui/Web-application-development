@@ -147,18 +147,6 @@
                     <a href="{{url_for('single_page',id=product.id)}}" class="float-left btn btn-sm btn-primary">
                         详情
                     </a>
-                    <!-- <form action="{{url_for('AddCart')}}" method="POST">
-                        <input type="hidden" name="product_id" value={{product.id}}>
-                        <button type="submit" class="btn btn-sm btn-warning float-right">添加到购物车</button>
-                        <input type="hidden" name="quantity" id="">
-                        {% set colors = product.colors.split(',') %}
-                        <select name="colors" id="colors" style="visibility: hidden;">
-                            {% for color in colors %}
-                            {% set col = color.split(':') %}
-                            <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
-                            {% endfor %}
-                        </select>
-                    </form> -->
                     <form action="{{url_for('AddCart')}}" method="POST">
                         <input type="hidden" name="product_id" value={{product.id}}>
                         <button type="submit" class="btn btn-sm btn-warning float-right">添加到购物车</button>

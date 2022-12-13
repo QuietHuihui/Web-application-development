@@ -73,7 +73,8 @@ def updatebrand(id):
         flash(f'品牌信息已经更新。','success')
         db.session.commit()
         return redirect(url_for('brands'))
-    return render_template('products/updatebrand.html',title='Update brand page',updatebrand=updatebrand)
+    return render_template('products/updatebrand.html',
+    title='Update brand page',updatebrand=updatebrand)
 
 @app.route('/deletebrand/<int:id>',methods=['POST'])
 def deletebrand(id):
